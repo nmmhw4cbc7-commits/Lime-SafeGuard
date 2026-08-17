@@ -130,8 +130,39 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="flex min-h-screen flex-col">
+        <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
+          <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
+            <Link to="/" className="flex items-center gap-2">
+              <span className="grid size-8 place-items-center rounded-md bg-primary font-mono text-sm font-bold text-primary-foreground">
+                LS
+              </span>
+              <span className="font-semibold tracking-tight">Lime SafeGuard</span>
+            </Link>
+            <nav className="flex items-center gap-4 text-sm text-muted-foreground">
+              <Link to="/verlauf" activeProps={{ className: "text-primary" }}>
+                Verlauf
+              </Link>
+              <Link to="/ratgeber" activeProps={{ className: "text-primary" }}>
+                Ratgeber
+              </Link>
+              <Link to="/hinweise" activeProps={{ className: "text-primary" }}>
+                Methodik
+              </Link>
+            </nav>
+          </div>
+        </header>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <footer className="border-t border-border py-6">
+          <div className="mx-auto max-w-5xl px-4 text-xs text-muted-foreground">
+            Lime SafeGuard liefert automatisierte technische Einschätzungen von Online-Shops –
+            keine Rechtsberatung.
+          </div>
+        </footer>
+      </div>
     </QueryClientProvider>
   );
 }
