@@ -1,4 +1,4 @@
-# 🛡️ Lime SafeGuard
+# 🍋‍🟩 Lime SafeGuard
 
 > A real-time fake shop scanner that helps you assess whether an online store looks trustworthy before you buy.
 
