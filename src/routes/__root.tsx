@@ -77,14 +77,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Lime SafeGuard – Fakeshop Scanner" },
+      {
+        name: "description",
+        content:
+          "Prüfe Online-Shops in Sekunden auf Fakeshop-Merkmale: Impressum, Domainalter, Zahlungsarten und Betrugsmuster.",
+      },
+      { property: "og:title", content: "Lime SafeGuard – Fakeshop Scanner" },
+      {
+        property: "og:description",
+        content: "Prüfe Online-Shops in Sekunden auf typische Fakeshop-Merkmale.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -92,6 +97,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -119,8 +130,39 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="flex min-h-screen flex-col">
+        <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
+          <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
+            <Link to="/" className="flex items-center gap-2">
+              <span className="grid size-8 place-items-center rounded-md bg-primary font-mono text-sm font-bold text-primary-foreground">
+                LS
+              </span>
+              <span className="font-semibold tracking-tight">Lime SafeGuard</span>
+            </Link>
+            <nav className="flex items-center gap-4 text-sm text-muted-foreground">
+              <Link to="/verlauf" activeProps={{ className: "text-primary" }}>
+                Verlauf
+              </Link>
+              <Link to="/ratgeber" activeProps={{ className: "text-primary" }}>
+                Ratgeber
+              </Link>
+              <Link to="/hinweise" activeProps={{ className: "text-primary" }}>
+                Methodik
+              </Link>
+            </nav>
+          </div>
+        </header>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <footer className="border-t border-border py-6">
+          <div className="mx-auto max-w-5xl px-4 text-xs text-muted-foreground">
+            Lime SafeGuard liefert automatisierte technische Einschätzungen von Online-Shops –
+            keine Rechtsberatung.
+          </div>
+        </footer>
+      </div>
     </QueryClientProvider>
   );
 }

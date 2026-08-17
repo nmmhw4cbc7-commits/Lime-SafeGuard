@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HinweiseRouteImport } from './routes/hinweise'
+import { Route as RatgeberRouteImport } from './routes/ratgeber'
+import { Route as VerlaufRouteImport } from './routes/verlauf'
+import { Route as ScanIdRouteImport } from './routes/scan.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HinweiseRoute = HinweiseRouteImport.update({
+  id: '/hinweise',
+  path: '/hinweise',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RatgeberRoute = RatgeberRouteImport.update({
+  id: '/ratgeber',
+  path: '/ratgeber',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerlaufRoute = VerlaufRouteImport.update({
+  id: '/verlauf',
+  path: '/verlauf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScanIdRoute = ScanIdRouteImport.update({
+  id: '/scan/$id',
+  path: '/scan/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/hinweise': typeof HinweiseRoute
+  '/ratgeber': typeof RatgeberRoute
+  '/verlauf': typeof VerlaufRoute
+  '/scan/$id': typeof ScanIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/hinweise': typeof HinweiseRoute
+  '/ratgeber': typeof RatgeberRoute
+  '/verlauf': typeof VerlaufRoute
+  '/scan/$id': typeof ScanIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/hinweise': typeof HinweiseRoute
+  '/ratgeber': typeof RatgeberRoute
+  '/verlauf': typeof VerlaufRoute
+  '/scan/$id': typeof ScanIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/hinweise' | '/ratgeber' | '/verlauf' | '/scan/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/hinweise' | '/ratgeber' | '/verlauf' | '/scan/$id'
+  id: '__root__' | '/' | '/hinweise' | '/ratgeber' | '/verlauf' | '/scan/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HinweiseRoute: typeof HinweiseRoute
+  RatgeberRoute: typeof RatgeberRoute
+  VerlaufRoute: typeof VerlaufRoute
+  ScanIdRoute: typeof ScanIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hinweise': {
+      id: '/hinweise'
+      path: '/hinweise'
+      fullPath: '/hinweise'
+      preLoaderRoute: typeof HinweiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber': {
+      id: '/ratgeber'
+      path: '/ratgeber'
+      fullPath: '/ratgeber'
+      preLoaderRoute: typeof RatgeberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verlauf': {
+      id: '/verlauf'
+      path: '/verlauf'
+      fullPath: '/verlauf'
+      preLoaderRoute: typeof VerlaufRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scan/$id': {
+      id: '/scan/$id'
+      path: '/scan/$id'
+      fullPath: '/scan/$id'
+      preLoaderRoute: typeof ScanIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HinweiseRoute: HinweiseRoute,
+  RatgeberRoute: RatgeberRoute,
+  VerlaufRoute: VerlaufRoute,
+  ScanIdRoute: ScanIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
